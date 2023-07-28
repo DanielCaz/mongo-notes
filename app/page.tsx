@@ -8,17 +8,17 @@ export default async function Home() {
   const notes = await getNotes();
 
   return (
-    <main className="px-8 max-w-md mx-auto">
+    <main className="px-8">
       <div className="flex justify-between items-center mt-8">
         <h1 className="text-center text-3xl">Mongo Notes</h1>
         <Link
           href="/add"
-          className="bg-cyan-500 text-white px-2 py-1 rounded hover:bg-cyan-600"
+          className="bg-cyan-500 text-white px-2 py-1 rounded hover:bg-cyan-600 shadow-md hover:shadow-lg transition duration-200"
         >
           Add Note
         </Link>
       </div>
-      <div className="flex flex-wrap gap-4 mt-8">
+      <div className="grid md:grid-cols-3 gap-4 mt-8 pb-3">
         {notes.map((note) => (
           <NoteItem key={note._id?.toString()} note={note} />
         ))}

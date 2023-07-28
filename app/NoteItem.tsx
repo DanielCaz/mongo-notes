@@ -18,20 +18,23 @@ const NoteItem = ({ note }: { note: Note }) => {
       key={note._id?.toString()}
       className="bg-white shadow-lg rounded-lg border-2 border-gray-300 p-3"
     >
-      <h2 className="text-xl font-bold">{note.title}</h2>
-      <p className="text-gray-700 text-sm">{note.content}</p>
-      <hr className="my-3 border-gray-300" />
       <div className="flex items-center">
-        <button className="text-red-500 ml-5" onClick={handleDelete}>
-          <AiFillDelete size={24} />
-        </button>
+        <h2 className="text-xl font-bold mr-5">{note.title}</h2>
         <button
-          className="text-blue-500 ml-3"
+          className="bg-blue-500 ml-auto text-white p-1 rounded hover:bg-blue-600 shadow-md hover:shadow-lg transition duration-200"
           onClick={() => router.push(`/edit/${note._id?.toString()}`)}
         >
           <AiFillEdit size={24} />
         </button>
+        <button
+          className="bg-red-500 ml-2 text-white p-1 rounded hover:bg-red-600 shadow-md hover:shadow-lg transition duration-200"
+          onClick={handleDelete}
+        >
+          <AiFillDelete size={24} />
+        </button>
       </div>
+      <hr className="my-3 border-gray-300" />
+      <p className="text-gray-700 text-sm">{note.content}</p>
     </div>
   );
 };

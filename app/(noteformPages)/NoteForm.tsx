@@ -87,7 +87,7 @@ const NoteForm = ({ note }: { note?: Note }) => {
           loading
             ? "bg-gray-300 cursor-not-allowed"
             : "bg-cyan-500 text-white hover:bg-cyan-600"
-        }`}
+        } shadow-md hover:shadow-lg transition duration-200`}
       >
         Save
       </button>
