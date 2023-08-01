@@ -26,6 +26,13 @@ npm install
 
    - Make sure your MongoDB instance is running.
    - Create a `.env.local` file and add the `MONGODB_URI` variable to point to your MongoDB database.
+   - Also add the `API_URL` variable to point to the local API endpoint.
+   - For example for a local MongoDB instance, your `.env.local` file would look something like this:
+
+   ```bash
+   MONGODB_URI=mongodb://localhost:27017/notes
+   API_URL=http://localhost:3000/api
+   ```
 
 ## Usage
 
