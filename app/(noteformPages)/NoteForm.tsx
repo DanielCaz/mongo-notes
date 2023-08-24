@@ -1,51 +1,39 @@
 "use client";
 
 import { Note } from "@/interfaces/Note";
-import { createNote, updateNote } from "@/lib/notes";
-import { useRouter } from "next/navigation";
+import { createNoteAction, updateNoteAction } from "@/lib/actions";
 import { useState } from "react";
 
 const NoteForm = ({ note }: { note?: Note }) => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const router = useRouter();
-
-  const handleAddNote = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    setLoading(true);
-    setErrorMessage("");
-
-    const formData = new FormData(e.currentTarget);
-
+  const handleFormAction = async (formData: FormData) => {
     const title = formData.get("title")?.toString();
     const content = formData.get("content")?.toString();
 
     if (!title || !content) return;
 
-    const data = { title, content };
+    const data = { title, content } as Note;
+
+    setLoading(true);
 
     try {
       if (note) {
-        await updateNote(note._id?.toString()!, data);
+        await updateNoteAction(note._id as string, data);
       } else {
-        await createNote(data);
+        await createNoteAction(data);
       }
-
-      router.refresh();
-      router.replace("/");
     } catch (error: any) {
-      console.error(error);
-      setLoading(false);
       setErrorMessage(error.message);
+      setLoading(false);
     }
   };
 
   return (
     <form
       className="flex flex-col gap-4 max-w-md mx-auto mt-8 shadow-lg rounded-lg border-2 border-gray-300 p-6"
-      onSubmit={handleAddNote}
+      action={handleFormAction}
     >
       <h2 className="text-2xl font-bold mb-2">
         {note ? "Update" : "Add"} Note

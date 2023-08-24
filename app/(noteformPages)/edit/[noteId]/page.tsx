@@ -1,10 +1,10 @@
 import NoteForm from "@/app/(noteformPages)/NoteForm";
-import { getNote } from "@/lib/notes";
+import { getNoteAction } from "@/lib/actions";
 
 const EditNote = async ({ params }: { params: { noteId: string } }) => {
-  const note = await getNote(params.noteId);
+  const note = await getNoteAction(params.noteId);
 
-  return <NoteForm note={note} />;
+  return <NoteForm note={{ ...note, _id: note._id?.toString() }} />;
 };
 
 export default EditNote;
